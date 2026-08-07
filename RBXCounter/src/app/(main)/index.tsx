@@ -5,14 +5,15 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemedText } from '@/components/themed-text';
 import { colors } from '@/theme';
+import { useAppStore } from '@/store/useAppStore';
 
 export default function HomeRoute() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const balance = useAppStore((state) => state.balance);
 
   const navigateTo = (path: string) => {
-    // We will hook this up later, for now it's just visual
-    console.log('Navigating to', path);
+    router.push(`/(main)/${path}` as any);
   };
 
   return (
@@ -34,7 +35,7 @@ export default function HomeRoute() {
         <View style={styles.balanceCard}>
           <View style={styles.balanceTextSection}>
             <ThemedText style={styles.hubStatus}>HUB STATUS: OPTIMAL</ThemedText>
-            <ThemedText style={styles.balanceAmount}>408 RBX</ThemedText>
+            <ThemedText style={styles.balanceAmount}>{balance} RBX</ThemedText>
             <ThemedText style={styles.balanceLabel}>WALLET BALANCE</ThemedText>
           </View>
           <View style={styles.lightningIconContainer}>
@@ -59,22 +60,26 @@ export default function HomeRoute() {
 
         {/* Grid */}
         <View style={styles.grid}>
-          {/* Card 1: Calculator */}
-          <TouchableOpacity style={styles.systemCard} activeOpacity={0.8} onPress={() => navigateTo('calculator')}>
-            <View style={[styles.iconCircle, { backgroundColor: '#0D361F' }]}>
-              <Ionicons name="calculator-outline" size={32} color="#4ADE80" />
-            </View>
-            <ThemedText style={styles.cardTitle}>All Calculator</ThemedText>
-            <ThemedText style={styles.cardSubtitle}>All RBX Calculators</ThemedText>
-          </TouchableOpacity>
-
-          {/* Card 2: Play Game */}
-          <TouchableOpacity style={styles.systemCard} activeOpacity={0.8} onPress={() => navigateTo('games')}>
+          {/* Card 1: Play Game (Link placeholder) */}
+          <TouchableOpacity 
+            style={styles.systemCard} 
+            activeOpacity={0.8} 
+            onPress={() => Alert.alert('Play Game', 'This will be an external link to a game.')}
+          >
             <View style={[styles.iconCircle, { backgroundColor: '#0A3338' }]}>
               <Ionicons name="game-controller-outline" size={32} color="#2DD4BF" />
             </View>
             <ThemedText style={styles.cardTitle}>Play Game</ThemedText>
             <ThemedText style={styles.cardSubtitle}>Play smart, Play hard</ThemedText>
+          </TouchableOpacity>
+
+          {/* Card 2: Use Spin wheel */}
+          <TouchableOpacity style={styles.systemCard} activeOpacity={0.8} onPress={() => navigateTo('spin')}>
+            <View style={[styles.iconCircle, { backgroundColor: '#381628' }]}>
+              <Ionicons name="aperture-outline" size={32} color="#F472B6" />
+            </View>
+            <ThemedText style={styles.cardTitle}>Use Spin wheel</ThemedText>
+            <ThemedText style={styles.cardSubtitle}>Spin the wheel for rewards</ThemedText>
           </TouchableOpacity>
 
           {/* Card 3: Scratch Card */}
@@ -86,13 +91,31 @@ export default function HomeRoute() {
             <ThemedText style={styles.cardSubtitle}>Scratch the card win a prize</ThemedText>
           </TouchableOpacity>
 
-          {/* Card 4: Quiz Time */}
+          {/* Card 4: Quiz time */}
           <TouchableOpacity style={styles.systemCard} activeOpacity={0.8} onPress={() => navigateTo('quiz')}>
-            <View style={[styles.iconCircle, { backgroundColor: '#0A3338' }]}>
-              <Ionicons name="bulb-outline" size={32} color="#2DD4BF" />
+            <View style={[styles.iconCircle, { backgroundColor: '#0E2142' }]}>
+              <Ionicons name="bulb-outline" size={32} color="#60A5FA" />
             </View>
-            <ThemedText style={styles.cardTitle}>Quiz Time</ThemedText>
+            <ThemedText style={styles.cardTitle}>Quiz time</ThemedText>
             <ThemedText style={styles.cardSubtitle}>Play quiz and get amazing gifts</ThemedText>
+          </TouchableOpacity>
+
+          {/* Card 5: meme */}
+          <TouchableOpacity style={styles.systemCard} activeOpacity={0.8} onPress={() => navigateTo('meme')}>
+            <View style={[styles.iconCircle, { backgroundColor: '#42330A' }]}>
+              <Ionicons name="happy-outline" size={32} color="#FBBF24" />
+            </View>
+            <ThemedText style={styles.cardTitle}>meme</ThemedText>
+            <ThemedText style={styles.cardSubtitle}>View and share funny memes</ThemedText>
+          </TouchableOpacity>
+
+          {/* Card 6: Card Match */}
+          <TouchableOpacity style={styles.systemCard} activeOpacity={0.8} onPress={() => navigateTo('cards')}>
+            <View style={[styles.iconCircle, { backgroundColor: '#381628' }]}>
+              <Ionicons name="albums-outline" size={32} color="#F87171" />
+            </View>
+            <ThemedText style={styles.cardTitle}>Card Match</ThemedText>
+            <ThemedText style={styles.cardSubtitle}>Match pairs to win RBX</ThemedText>
           </TouchableOpacity>
         </View>
         

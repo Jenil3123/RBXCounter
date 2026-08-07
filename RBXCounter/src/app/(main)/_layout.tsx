@@ -9,7 +9,7 @@ export default function MainLayout() {
       }}
     >
       <Stack.Screen name="index" />
-      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="rewards" />
     </Stack>
   );
 }
